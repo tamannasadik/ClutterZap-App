@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "409357940412",
+    "firebase_url": "https://clutterzap-f7e95-default-rtdb.firebaseio.com",
+    "project_id": "clutterzap-f7e95",
+    "storage_bucket": "clutterzap-f7e95.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409357940412:android:ba5b6848a2f31b4d4a82b9",
+        "android_client_info": {
+          "package_name": "com.example.clutter_zap"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaVhxCXTM9x_s4tF22obz1Rwhea923zk4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409357940412:android:94bf9974ae227ea34a82b9",
+        "android_client_info": {
+          "package_name": "com.example.clutterzap"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaVhxCXTM9x_s4tF22obz1Rwhea923zk4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
