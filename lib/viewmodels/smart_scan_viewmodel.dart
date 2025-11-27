@@ -1,29 +1,22 @@
-// import 'package:flutter/foundation.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
-
-// class SmartScanViewModel extends ChangeNotifier {
-//   final tasks = FirebaseFirestore.instance.collection('tasks');
-
-//   Future<void> addDummyTask() async {
-//     try {
-//       await tasks.add({
-//         'title': 'Sample Task',
-//         'created': DateTime.now(),
-//       });
-//       debugPrint("Dummy task added successfully!");
-//     } catch (e) {
-//       debugPrint("Error adding task: $e");
-//     }
-//   }
-// }
-
-
 import 'package:flutter/material.dart';
-class SmartScanViewModel extends ChangeNotifier {
-  String message = "Smart Scan Ready";
+import 'package:firebase_database/firebase_database.dart';
 
-  void updateMessage(String newMessage) {
-    message = newMessage;
-    notifyListeners();
+class SmartScanViewModel extends ChangeNotifier {
+  final DatabaseReference _dbRef =
+      FirebaseDatabase.instance.ref().child("scans");
+
+  Future<void> saveScannedData(String code) async {
+    try {
+      final timestamp = DateTime.now().millisecondsSinceEpoch;
+
+      await _dbRef.push().set({
+        "code": code,
+        "timestamp": timestamp,
+      });
+
+      print("Scanned code saved: $code");
+    } catch (e) {
+      print("Error saving scanned data: $e");
+    }
   }
 }

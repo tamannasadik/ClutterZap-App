@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../daily_tasks/daily_task_screen.dart';
+import '../smart_scan/smart_scan_view.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -17,7 +18,7 @@ class HomeScreen extends StatelessWidget {
               // Greeting
               Text(
                 "Hello Tamanna!",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
                   color: Colors.deepPurple,
@@ -25,7 +26,7 @@ class HomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // Progress Circle (simple)
+              // Progress Circle
               Center(
                 child: SizedBox(
                   height: 130,
@@ -35,50 +36,80 @@ class HomeScreen extends StatelessWidget {
                     strokeWidth: 10,
                     backgroundColor: Colors.deepPurple.shade100,
                     valueColor:
-                        AlwaysStoppedAnimation(Colors.deepPurpleAccent),
+                        const AlwaysStoppedAnimation(Colors.deepPurpleAccent),
                   ),
                 ),
               ),
               const SizedBox(height: 20),
 
               // Quick Actions
-              Text("Quick Actions",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              const Text(
+                "Quick Actions",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
               const SizedBox(height: 12),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _quickButton("Clean Room", Icons.cleaning_services),
-                  _quickButton("Daily Tasks", Icons.check_circle_outline),
+                  // Smart Scan Button
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const SmartScanView(),
+                        ),
+                      );
+                    },
+                    child: _quickButton("Smart Scan", Icons.qr_code_scanner),
+                  ),
+
+                  // Daily Tasks Button
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const DailyTaskScreen(),
+                        ),
+                      );
+                    },
+                    child:
+                        _quickButton("Daily Tasks", Icons.check_circle_outline),
+                  ),
+
+                  // Motivation Button
                   _quickButton("Motivation", Icons.favorite),
                 ],
               ),
+
               const SizedBox(height: 25),
 
-              // Room Cards Title
-              Text("Your Rooms",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              // Your Rooms Section
+              const Text(
+                "Your Rooms",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
               const SizedBox(height: 10),
 
-              // Grid of Room Cards
               Expanded(
                 child: GridView.count(
                   crossAxisCount: 2,
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 12,
-                  children: [
-                    _roomCard("Bedroom", Icons.bed),
-                    _roomCard("Kitchen", Icons.kitchen),
-                    _roomCard("Study", Icons.menu_book),
-                    _roomCard("Closet", Icons.storefront),
+                  children: const [
+                    _RoomCard(title: "Bedroom", icon: Icons.bed),
+                    _RoomCard(title: "Kitchen", icon: Icons.kitchen),
+                    _RoomCard(title: "Study", icon: Icons.menu_book),
+                    _RoomCard(title: "Closet", icon: Icons.storefront),
                   ],
                 ),
               ),
 
               const SizedBox(height: 12),
 
-              // 🔥 Go to Daily Tasks Button (ADDED)
+              // Go to Daily Tasks Button
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -115,7 +146,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // Quick button widget
+  // Quick Action Button Widget
   Widget _quickButton(String text, IconData icon) {
     return Column(
       children: [
@@ -125,13 +156,22 @@ class HomeScreen extends StatelessWidget {
           child: Icon(icon, size: 28, color: Colors.deepPurple),
         ),
         const SizedBox(height: 6),
-        Text(text, style: TextStyle(fontSize: 12)),
+        Text(text, style: const TextStyle(fontSize: 12)),
       ],
     );
   }
+}
 
-  // Room Card widget
-  Widget _roomCard(String title, IconData icon) {
+// Room Card as StatelessWidget for cleaner code
+class _RoomCard extends StatelessWidget {
+  final String title;
+  final IconData icon;
+
+  const _RoomCard({required this.title, required this.icon, Key? key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.deepPurple.shade50,
@@ -143,8 +183,11 @@ class HomeScreen extends StatelessWidget {
           children: [
             Icon(icon, size: 40, color: Colors.deepPurple),
             const SizedBox(height: 10),
-            Text(title,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+            Text(
+              title,
+              style: const TextStyle(
+                  fontSize: 18, fontWeight: FontWeight.w600),
+            ),
           ],
         ),
       ),
