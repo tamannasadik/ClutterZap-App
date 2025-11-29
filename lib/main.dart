@@ -8,6 +8,8 @@ import 'firebase_options.dart';
 import 'viewmodels/task_viewmodel.dart';
 import 'viewmodels/quick_clean_viewmodel.dart';
 import 'viewmodels/smart_scan_viewmodel.dart';
+import 'package:clutter_zap/viewmodels/distraction_viewmodel.dart';
+
 
 // Screens
 import 'screens/splash/splash_screen.dart';
@@ -36,6 +38,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => TaskViewModel()),
         ChangeNotifierProvider(create: (_) => QuickCleanViewModel()),
         ChangeNotifierProvider(create: (_) => SmartScanViewModel()),
+        ChangeNotifierProvider(create: (_) => DistractionViewModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
