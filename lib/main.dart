@@ -3,13 +3,13 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'firebase_options.dart';
+import 'services/firebase_helpers.dart'; // import the helper
 
 // ViewModels
 import 'viewmodels/task_viewmodel.dart';
 import 'viewmodels/quick_clean_viewmodel.dart';
 import 'viewmodels/smart_scan_viewmodel.dart';
-import 'package:clutter_zap/viewmodels/distraction_viewmodel.dart';
-
+import 'viewmodels/distraction_viewmodel.dart';
 
 // Screens
 import 'screens/splash/splash_screen.dart';
@@ -25,6 +25,10 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // Create default user if not exists
+  await FirebaseHelpers.createDefaultUser();
+
   runApp(const MyApp());
 }
 
